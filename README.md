@@ -1,70 +1,47 @@
-# Getting Started with Create React App
+# VoteTracker
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app)
+VoteTracker is designed to keep citizens informed about legislative activity by allowing them to browse, follow, and comment on legislators, bills, issues, and legislators' votes. 
 
-## Available Scripts
+Data for this project is pulled from the [Pro Public Congress API](https://projects.propublica.org/api-docs/congress-api/).
 
-In the project directory, you can run:
+This repo is for the frontend ReactJS-based application. The backend, using Ruby, ActiveRecord, and Sinatra, is located [here](https://github.com/mattIshida/phase-3-project-backend).
 
-### `npm start`
+## Launching the Backend
+- Clone down the backend from the repo linked above.
+- You will need a free API key to pull in the seed data. Get one [here](https://www.propublica.org/datastore/api/propublica-congress-api). 
+- Create a file in the main project folder called "private.rb"
+- The contents of the private.rb file should be the following, with the string in double-quotes replaced by your API key: 
+```API_KEY = "yourNewProPublicaCongressAPIkey"```
+- In the project folder:
+    - Run ```bundle install``` to install Ruby dependencies
+    - Run ```bundle exec rake db:migrate``` to set up SQLite dbs 
+    - Run ```bundle exec rake db:seed```
+    - Run ```bundle exec rake server``` to start the backend server
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Launching the Frontend
+- Clone down the frontend from this repo.
+- In the project folder:
+    - Run ```npm install``` to install Node dependencies
+    - Run ```npm server``` to start the frontend server.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Features
+Users can:
+- Browse legislators, bills, and issues
+- Follow legislators, bills, and issues
+- Followed items show up on the user's MyVoteTracker page for quick reference
+- Comment on bills
 
-### `npm test`
+## Screenshots
+Coming soon
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Tech
 
-### `npm run build`
+Frontend: ReactJS, React Bootstrap
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Backend: Ruby, SQLite, ActiveRecord, Sinatra
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Created by
+Matt Ishida
+- [LinkedIn]()
+- [Github]() 
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)

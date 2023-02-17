@@ -1,3 +1,49 @@
+
+
+.billCard {
+  background: black;
+  max-width: 600px;
+  margin: 10px;
+}
+
+.legislatorCard {
+  max-width: 600px;
+  min-width: 300px;
+  margin: 10px;
+  width: 20%; 
+}
+
+.issueCard {
+  max-width: 600px;
+  min-width: 300px;
+  margin: 10px;
+  width: 20%; 
+}
+
+.commentCard, .commentForm {
+  margin: 10px;
+}
+
+.billContainer {
+  display: flex;
+  flex-direction: row;
+  margin: auto; 
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.detailsButton {
+  position: relative;
+  margin:auto;
+  bottom: 1rem;
+}
+
+.tagLink {
+  font-size: 8pt;
+  background: red;
+  color: red; 
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
