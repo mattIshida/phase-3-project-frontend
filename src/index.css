@@ -57,3 +57,51 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+
+.memberRow {
+  display: flex;
+  width: 100vw;
+  border-style: solid;
+  border-width: 1px 0px 0px 0px;
+}
+
+.positionTile {
+  width: .5rem;
+  height: .75rem;
+  margin-top: 4px;
+  margin-bottom: 4px;
+  margin-right: 1px;
+}
+
+.FillYes {
+  background-color: green;
+  border-top-right-radius: 15%;
+  border-top-left-radius: 15%;
+}
+
+.FillNo {
+  background-color: red;
+  margin-top: 16px;
+  border-bottom-right-radius: 15%;
+  border-bottom-left-radius: 15%;
+}
+
+.FillNotVoting {
+  background-color: #ffffff;
+  border-color: gray;
+  border-width: 1px;
+  margin-top: 8px;
+  border-style: solid;
+  border-radius: 25%;
+} */
+
+.memberRowLabel {
+  width: 15rem;
+}
+
+.tileRow {
+  display: flex;
+  width: 50rem;
+  align-content: center;
+}
