@@ -14,8 +14,8 @@ import Board from './components/Board'
 const URL = "http://localhost:9292"
 
 function App() {
-  console.log(process.env)
   const [members, setMembers] = useState([])
+  const [votes, setVotes] = useState([])
   const [bills, setBills] = useState([])
   const [userData, setUserData] = useState([])
   const [issues, setIssues] = useState([])
@@ -27,9 +27,23 @@ function App() {
     .then(setMembers)
   }, [])
 
-  // console.log(members)
+  useEffect(()=>{
+    fetch(`${URL}/votes`)
+    .then(res=> res.json())
+    .then(setVotes)
+  }, [])
+
+  const shades = votes.map((v, i)=> {
+    if(i==0) return 0
+    return v.votable_id == votes[i-1].votable_id ? 0 : 1
+  }).map((x,i, arr)=> arr.slice(0, i+1).reduce((acc,elem)=>acc+elem, 0)).map(x=> x%2)
+  console.log('shades', shades)
   return <>
-    <Board members={members.slice(0,451).sort((a,b)=> a.party.localeCompare(b.party))} />
+    <Board 
+      members={members.slice(0,451).sort((a,b)=> a.party.localeCompare(b.party))} 
+      votes={votes}
+      shades={shades}
+    />
   </>
   // useEffect(()=> {
   //   fetch(`${URL}/bills`)
