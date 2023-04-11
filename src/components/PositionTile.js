@@ -59,6 +59,7 @@ function PositionTile({ position, vote, shade }){
         <Popover className='popover-placement-top' onMouseLeave={handlePopoverClose} onMouseEnter={handlePopoverClick}>
             <Popover.Header>{vote?.votable_id.toUpperCase()}</Popover.Header>
             <Popover.Body>
+                <strong>{vote.description}</strong> <br/>
                 Question: {vote.question} <br/>
                 Result: {vote?.result}
                 <Button variant="primary" onClick={() => alert('You clicked the button!')}>

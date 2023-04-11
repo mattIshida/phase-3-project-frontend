@@ -38,6 +38,7 @@ function App() {
     return v.votable_id == votes[i-1].votable_id ? 0 : 1
   }).map((x,i, arr)=> arr.slice(0, i+1).reduce((acc,elem)=>acc+elem, 0)).map(x=> x%2)
   console.log('shades', shades)
+  console.log('votes', votes)
   return <>
     <Board 
       members={members.slice(0,451).sort((a,b)=> a.party.localeCompare(b.party))} 
