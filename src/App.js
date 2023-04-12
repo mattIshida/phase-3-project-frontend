@@ -10,16 +10,14 @@ import BillDetailPage from "./components/BillDetailPage"
 import UserHome from "./components/UserHome"
 import IssuesPage from "./components/IssuesPage"
 import Board from './components/Board'
+import { Button } from 'react-bootstrap'
 
 const URL = "http://localhost:9292"
 
 function App() {
   const [members, setMembers] = useState([])
   const [votes, setVotes] = useState([])
-  const [bills, setBills] = useState([])
-  const [userData, setUserData] = useState([])
-  const [issues, setIssues] = useState([])
-  const [userId , setUserId] = useState(5)
+  const [filter, setFilter]= useState({partyFilter: [], positionFilter: [], voteFilter: null})
 
   useEffect(()=> {
     fetch(`${URL}/members`)
@@ -37,13 +35,19 @@ function App() {
     if(i==0) return 0
     return v.votable_id == votes[i-1].votable_id ? 0 : 1
   }).map((x,i, arr)=> arr.slice(0, i+1).reduce((acc,elem)=>acc+elem, 0)).map(x=> x%2)
-  console.log('shades', shades)
-  console.log('votes', votes)
+ 
+  const filteredMembers = members.filter((m) => filter.partyFilter.length==0 || filter.partyFilter.includes(m.party))
+  .filter((m)=> filter.voteFilter === null || filter.positionFilter.length==0 || filter.positionFilter.includes(m.positions[filter.voteFilter]?.vote_position))
+
   return <>
+    <Button onClick={()=>{
+      setFilter({partyFilter: [], positionFilter: [], voteFilter: null})
+    }}>Clear filters</Button>
     <Board 
-      members={members.slice(0,1000).sort((a,b)=> a.party.localeCompare(b.party))} 
+      members={filteredMembers.slice(0,1000).sort((a,b)=> b.party.localeCompare(a.party))} 
       votes={votes}
       shades={shades}
+      setFilter={setFilter}
     />
   </>
   // useEffect(()=> {
