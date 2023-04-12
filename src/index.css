@@ -61,9 +61,10 @@ code {
 
 .memberRow {
   display: flex;
-  width: 100vw;
+  justify-content: space-between;
   border-style: solid;
   border-width: 1px 0px 0px 0px;
+  min-height: 2rem;
 }
 
 .positionTile {
@@ -94,18 +95,20 @@ code {
   margin-top: 8px;
   border-style: solid;
   border-radius: 25%;
-} */
+}
 
 .memberRowLabel {
-  width: 15rem;
+  min-width: 10rem;
+  padding: .1rem .05rem;
+  align-content: center;
 }
 
 .tileRow {
   display: flex;
-  width: 50rem;
   align-content: center;
 }
 
 .shade1 {
   background-color: rgb(218, 217, 217);
 }
+

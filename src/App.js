@@ -41,7 +41,7 @@ function App() {
   console.log('votes', votes)
   return <>
     <Board 
-      members={members.slice(0,451).sort((a,b)=> a.party.localeCompare(b.party))} 
+      members={members.slice(0,1000).sort((a,b)=> a.party.localeCompare(b.party))} 
       votes={votes}
       shades={shades}
     />

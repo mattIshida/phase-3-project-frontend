@@ -1,4 +1,6 @@
+import { Container } from 'react-bootstrap'
 import MemberRow from './MemberRow'
+import BoardHeader from './BoardHeader'
 
 function Board({ members, votes, shades }){
 
@@ -8,7 +10,9 @@ function Board({ members, votes, shades }){
 
     return(
         <>
-            {memberRows}
+            <Container className="Board col-8 my-3">
+                {memberRows}
+            </Container>
         </>
     )
 }
