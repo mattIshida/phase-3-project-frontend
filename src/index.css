@@ -112,3 +112,6 @@ code {
   background-color: rgb(218, 217, 217);
 }
 
+.blankTile {
+  height: 0px;
+}

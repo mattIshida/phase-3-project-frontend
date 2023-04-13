@@ -51,7 +51,7 @@ function App() {
     
     <Controls votes={votes} members={members} controlOptions={controlOptions} setControlOptions={setControlOptions}/>
     <Board 
-      members={filteredMembers.slice(0,4).sort((a,b)=> b.party.localeCompare(a.party))} 
+      members={filteredMembers.slice(0,100)} 
       votes={votes}
       shades={shades}
       setFilter={setFilter}

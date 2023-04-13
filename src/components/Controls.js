@@ -7,6 +7,8 @@ function Controls({ votes, members, controlOptions, setControlOptions }){
     const states = members?.reduce((acc, elem) => acc.includes(elem.state) ? acc : [...acc, elem.state], []).sort((a,b)=> a.localeCompare(b))
     
     
+    const [formData, setFormData]=useState({})
+
     function handleChange(e){
         setControlOptions({...controlOptions, [e.target.name]: e.target.value})
     }
@@ -52,7 +54,8 @@ function Controls({ votes, members, controlOptions, setControlOptions }){
                 <option value='nonAlignmentWithChamber'>Chamber Non-alignment</option>
             </select>
 
-            <input name='searchMember' type='text' value={controlOptions.searchMember} onChange={handleChange}></input>
+            <input name='searchMember' type='text' value={formData.searchMember} onChange={(e)=>setFormData({searchMember: e.target.value})}></input>
+            <button onClick={()=>setControlOptions({...controlOptions, searchMember: formData.searchMember})}>Search</button>
         </>
     )
 }

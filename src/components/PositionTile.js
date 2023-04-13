@@ -23,6 +23,9 @@ function PositionTile({ position, vote, shade, member, idx, setFilter, controlOp
 
     const opacity = !controlOptions.alignment ? 1 : opacityLookup[controlOptions.alignment]
     
+    const blankTileQuestion = !controlOptions.questionType || controlOptions.questionType == '' || controlOptions.questionType == vote.question ? '' : 'blankTile'
+    const blankTileVotable = !controlOptions.voteType || controlOptions.voteType == '' || controlOptions.voteType == vote.votable_type ? '' : 'blankTile'
+
     const handlePopoverClick = () => {
         console.log('handlePopoverClick triggered')
         setShowPopover(true);
@@ -38,14 +41,17 @@ function PositionTile({ position, vote, shade, member, idx, setFilter, controlOp
             <div ref={target}
                 onMouseEnter={handlePopoverClick} 
                 onMouseLeave={handlePopoverClose} 
-                className={`positionTile Fill${positionClass}`} style={{opacity: opacity}}>
+                className={`positionTile Fill${positionClass} ${blankTileVotable} ${blankTileQuestion}`} style={{opacity: opacity}}>
             </div>
         </div>    
+
+
         <Overlay target={target.current} show={showPopover} flip='true' placement="top" >
             <Popover className='popover-placement-top' onMouseLeave={handlePopoverClose} onMouseEnter={handlePopoverClick}>
                 <Popover.Header>{member.first_name} {member.last_name}'s {position.vote_position} on {vote?.votable_id.toUpperCase()}</Popover.Header>
                 <Popover.Body>
                     {vote.question} <br/>
+                    {vote.date} {vote.time}<br/>
                     <strong>{vote.description}</strong> <br/>
                     {`${Math.round(alignmentWithParty*100)}%`} aligned with party<br/>
                     {`${Math.round(alignmentWithChamber*100)}%`} aligned with chamber<br/>
