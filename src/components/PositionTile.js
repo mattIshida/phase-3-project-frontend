@@ -2,7 +2,7 @@ import Popover from 'react-bootstrap/Popover';
 import { Button, Overlay } from 'react-bootstrap';
 import { useState, useRef } from 'react'
 
-function PositionTile({ position, vote, shade, member, idx, setFilter }){
+function PositionTile({ position, vote, shade, member, idx, setFilter, controlOptions }){
     
     const positionClass = position.vote_position.replaceAll(' ','')
     const partySummary = vote?.summary[member.party]
@@ -11,6 +11,18 @@ function PositionTile({ position, vote, shade, member, idx, setFilter }){
     const [showPopover, setShowPopover] = useState(false);
     const target = useRef(null);
 
+
+
+    const opacityLookup = {
+        '': 1,
+        alignmentWithParty,
+        alignmentWithChamber,
+        nonAlignmentWithParty: 1-alignmentWithParty,
+        nonAlignmentWithChamber: 1-alignmentWithChamber
+    }
+
+    const opacity = !controlOptions.alignment ? 1 : opacityLookup[controlOptions.alignment]
+    
     const handlePopoverClick = () => {
         console.log('handlePopoverClick triggered')
         setShowPopover(true);
@@ -26,7 +38,7 @@ function PositionTile({ position, vote, shade, member, idx, setFilter }){
             <div ref={target}
                 onMouseEnter={handlePopoverClick} 
                 onMouseLeave={handlePopoverClose} 
-                className={`positionTile Fill${positionClass}`} style={{opacity: 1-alignmentWithParty}}>
+                className={`positionTile Fill${positionClass}`} style={{opacity: opacity}}>
             </div>
         </div>    
         <Overlay target={target.current} show={showPopover} flip='true' placement="top" >

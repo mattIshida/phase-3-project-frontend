@@ -11,6 +11,7 @@ import UserHome from "./components/UserHome"
 import IssuesPage from "./components/IssuesPage"
 import Board from './components/Board'
 import { Button } from 'react-bootstrap'
+import Controls from './components/Controls'
 
 const URL = "http://localhost:9292"
 
@@ -18,6 +19,7 @@ function App() {
   const [members, setMembers] = useState([])
   const [votes, setVotes] = useState([])
   const [filter, setFilter]= useState({partyFilter: [], positionFilter: [], voteFilter: null})
+  const [controlOptions, setControlOptions] = useState({alignment: ''})
 
   useEffect(()=> {
     fetch(`${URL}/members`)
@@ -38,16 +40,22 @@ function App() {
  
   const filteredMembers = members.filter((m) => filter.partyFilter.length==0 || filter.partyFilter.includes(m.party))
   .filter((m)=> filter.voteFilter === null || filter.positionFilter.length==0 || filter.positionFilter.includes(m.positions[filter.voteFilter]?.vote_position))
-
+  .filter(m => !controlOptions.party || controlOptions.party===m.party)
+  .filter(m=> !controlOptions.state || controlOptions.state == m.state)
+  
   return <>
     <Button onClick={()=>{
       setFilter({partyFilter: [], positionFilter: [], voteFilter: null})
-    }}>Clear filters</Button>
+    }}>Clear filters
+    </Button>
+    
+    <Controls votes={votes} members={members} controlOptions={controlOptions} setControlOptions={setControlOptions}/>
     <Board 
-      members={filteredMembers.slice(0,1000).sort((a,b)=> b.party.localeCompare(a.party))} 
+      members={filteredMembers.slice(0,4).sort((a,b)=> b.party.localeCompare(a.party))} 
       votes={votes}
       shades={shades}
       setFilter={setFilter}
+      controlOptions={controlOptions}
     />
   </>
   // useEffect(()=> {

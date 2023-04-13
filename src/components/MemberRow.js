@@ -1,6 +1,6 @@
 import PositionTile from './PositionTile'
 
-function MemberRow({ member, votes, shades, setFilter }){
+function MemberRow({ member, votes, shades, setFilter, controlOptions }){
 
     const positionTiles = member?.positions?.map((positionObj, i) => {
         return <PositionTile 
@@ -11,6 +11,7 @@ function MemberRow({ member, votes, shades, setFilter }){
                 member={member} 
                 idx={i}
                 setFilter={setFilter}
+                controlOptions={controlOptions}
                 />
     })
 
@@ -19,9 +20,9 @@ function MemberRow({ member, votes, shades, setFilter }){
             <div className='memberRowLabel'>
                     {`${member.first_name} ${member.last_name} (${member.party})`}
             </div>
-            {/* <div className='memberStateLabel'>
+            <div className='memberStateLabel'>
                 {`${member.state}`}
-            </div> */}
+            </div>
             <div className="tileRow">
                 {positionTiles}
             </div>

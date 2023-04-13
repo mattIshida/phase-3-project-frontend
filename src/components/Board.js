@@ -1,10 +1,10 @@
 import { Container } from 'react-bootstrap'
 import MemberRow from './MemberRow'
 
-function Board({ members, votes, shades, setFilter }){
+function Board({ members, votes, shades, setFilter, controlOptions }){
 
     const memberRows = members?.map((member)=>{
-        return <MemberRow member={member} key={member.id} votes={votes} shades={shades} setFilter={setFilter}/>
+        return <MemberRow member={member} key={member.id} votes={votes} shades={shades} setFilter={setFilter} controlOptions={controlOptions}/>
     })
 
     return(
