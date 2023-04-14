@@ -20,18 +20,58 @@ function App() {
   const [votes, setVotes] = useState([])
   const [filter, setFilter]= useState({partyFilter: [], positionFilter: [], voteFilter: null})
   const [controlOptions, setControlOptions] = useState({alignment: ''})
+  const [authors, setAuthors] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+  const perPage = 10
 
-  useEffect(()=> {
-    fetch(`${URL}/members`)
-    .then(res => res.json())
-    .then(setMembers)
-  }, [])
+  useEffect(() => {
+    fetch(`${URL}/members?page=${currentPage}&per_page=${perPage}`)
+      .then(res => res.json())
+      .then(response => {
+        setMembers(response);
+        setCurrentPage(response[0].positions.current_page);
+        setTotalPages(response[0].positions.total_pages);
+      })
+      .catch(error => console.log(error));
+  }, [currentPage]);
 
-  useEffect(()=>{
-    fetch(`${URL}/votes`)
-    .then(res=> res.json())
-    .then(setVotes)
-  }, [])
+  useEffect(() => {
+    fetch(`${URL}/votes?page=${currentPage}&per_page=${perPage}`)
+      .then(res => res.json())
+      .then(response => {
+        setVotes(response);
+      })
+      .catch(error => console.log(error));
+  }, [currentPage]);
+
+
+  function handlePrevPage() {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+    }
+  }
+
+  function handleNextPage() {
+    if (currentPage < totalPages) {
+      setCurrentPage(currentPage + 1);
+    }
+  }
+
+  
+
+
+  // useEffect(()=> {
+  //   fetch(`${URL}/members`)
+  //   .then(res => res.json())
+  //   .then(setMembers)
+  // }, [])
+
+  // useEffect(()=>{
+  //   fetch(`${URL}/votes`)
+  //   .then(res=> res.json())
+  //   .then(setVotes)
+  // }, [])
 
   const shades = votes.map((v, i)=> {
     if(i==0) return 0
@@ -39,19 +79,25 @@ function App() {
   }).map((x,i, arr)=> arr.slice(0, i+1).reduce((acc,elem)=>acc+elem, 0)).map(x=> x%2)
  
   const filteredMembers = members.filter((m) => filter.partyFilter.length==0 || filter.partyFilter.includes(m.party))
-  .filter((m)=> filter.voteFilter === null || filter.positionFilter.length==0 || filter.positionFilter.includes(m.positions[filter.voteFilter]?.vote_position))
+  .filter((m)=> filter.voteFilter === null || filter.positionFilter.length==0 || filter.positionFilter.includes(m.positions.positions[filter.voteFilter]?.vote_position))
   .filter(m => !controlOptions.party || controlOptions.party===m.party)
   .filter(m=> !controlOptions.state || controlOptions.state == m.state)
-  
+
+  console.log('votes', votes)
+  console.log('members', members)
+  // return <>Hello</>
+
   return <>
     <Button onClick={()=>{
       setFilter({partyFilter: [], positionFilter: [], voteFilter: null})
     }}>Clear filters
     </Button>
-    
+    {[...Array(totalPages).keys()].map(num => <a onClick={()=>setCurrentPage(num+1)}>{num+1}</a>)}
     <Controls votes={votes} members={members} controlOptions={controlOptions} setControlOptions={setControlOptions}/>
+    
+    {filter.partyFilter.length>0 || filter.positionFilter.length >0 || filter.voteFilter ? `Showing votes similar to ${filter.member?.last_name}'s on ${filter.voteFilter}` : null}
     <Board 
-      members={filteredMembers.slice(0,100)} 
+      members={filteredMembers.slice(0,435)} 
       votes={votes}
       shades={shades}
       setFilter={setFilter}

@@ -48,7 +48,7 @@ function PositionTile({ position, vote, shade, member, idx, setFilter, controlOp
 
         <Overlay target={target.current} show={showPopover} flip='true' placement="top" >
             <Popover className='popover-placement-top' onMouseLeave={handlePopoverClose} onMouseEnter={handlePopoverClick}>
-                <Popover.Header>{member.first_name} {member.last_name}'s {position.vote_position} on {vote?.votable_id.toUpperCase()}</Popover.Header>
+                <Popover.Header>{member.first_name} {member.last_name}'s {position.vote_position} on {vote?.votable_id?.toUpperCase()}</Popover.Header>
                 <Popover.Body>
                     {vote.question} <br/>
                     {vote.date} {vote.time}<br/>
@@ -57,7 +57,7 @@ function PositionTile({ position, vote, shade, member, idx, setFilter, controlOp
                     {`${Math.round(alignmentWithChamber*100)}%`} aligned with chamber<br/>
                     Result: {vote?.result}<br/>
                     <Button variant="primary" onClick={() => {
-                        setFilter({positionFilter: [position.vote_position], partyFilter: [member.party], voteFilter: idx})}}
+                        setFilter({positionFilter: [position.vote_position], partyFilter: [member.party], voteFilter: idx, member: member})}}
                     >
                         See similar votes
                     </Button>

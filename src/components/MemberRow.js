@@ -1,8 +1,8 @@
 import PositionTile from './PositionTile'
 
 function MemberRow({ member, votes, shades, setFilter, controlOptions }){
-    console.log('rerender')
-    const positionTiles = member?.positions?.map((positionObj, i) => {
+
+    const positionTiles = member?.positions.positions?.map((positionObj, i) => {
         return <PositionTile 
                 key={positionObj.id} 
                 position={positionObj} 
