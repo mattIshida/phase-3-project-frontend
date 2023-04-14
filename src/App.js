@@ -23,7 +23,7 @@ function App() {
   const [authors, setAuthors] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
-  const perPage = 10
+  const perPage = 25
 
   useEffect(() => {
     fetch(`${URL}/members?page=${currentPage}&per_page=${perPage}`)
@@ -34,17 +34,15 @@ function App() {
         setTotalPages(response[0].positions.total_pages);
       })
       .catch(error => console.log(error));
-  }, [currentPage]);
-
-  useEffect(() => {
+    
     fetch(`${URL}/votes?page=${currentPage}&per_page=${perPage}`)
       .then(res => res.json())
       .then(response => {
         setVotes(response);
       })
       .catch(error => console.log(error));
-  }, [currentPage]);
 
+  }, [currentPage]);
 
   function handlePrevPage() {
     if (currentPage > 1) {
@@ -85,6 +83,7 @@ function App() {
 
   console.log('votes', votes)
   console.log('members', members)
+  console.log('currentPage', currentPage)
   // return <>Hello</>
 
   return <>

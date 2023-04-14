@@ -61,18 +61,39 @@ code {
 
 .memberRow {
   display: flex;
-  justify-content: space-between;
   border-style: solid;
+  justify-content: space-between;
   border-width: 1px 0px 0px 0px;
   min-height: 2rem;
 }
 
+
+.memberRowLabel {
+  width: 50%;
+  display: flex;
+  justify-content: space-between;
+  min-width: 10rem;
+  padding: .1rem .05rem;
+  padding-right: 2rem;
+  align-content: center;
+}
+
+.memberNameLabel {
+}
+
+.tileRow {
+  display: flex;
+  align-content: center;
+  justify-content: end;
+}
+
+
 .positionTile {
-  width: .5rem;
+  width: .6rem;
   height: .75rem;
-  margin-top: 4px;
-  margin-bottom: 4px;
-  margin-right: 1px;
+  margin-top: .2rem;
+  margin-bottom: .2rem;
+  margin-right: .07rem;
 }
 
 .FillYes {
@@ -83,7 +104,7 @@ code {
 
 .FillNo {
   background-color: red;
-  margin-top: 16px;
+  margin-top: .95rem;
   border-bottom-right-radius: 15%;
   border-bottom-left-radius: 15%;
 }
@@ -97,16 +118,9 @@ code {
   border-radius: 25%;
 }
 
-.memberRowLabel {
-  min-width: 10rem;
-  padding: .1rem .05rem;
-  align-content: center;
-}
 
-.tileRow {
-  display: flex;
-  align-content: center;
-}
+
+
 
 .shade1 {
   background-color: rgb(218, 217, 217);

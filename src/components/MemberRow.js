@@ -18,11 +18,18 @@ function MemberRow({ member, votes, shades, setFilter, controlOptions }){
     return(
         <div className='memberRow'>
             <div className='memberRowLabel'>
-                    {`${member.first_name} ${member.last_name} (${member.party})`}
+                    
+                    <div className='memberNameLabel'>
+                        {`${member.first_name} ${member.last_name} (${member.party})`}
+                    </div>
+
+                    <div className='memberStateLabel'>
+                        {`${member.state}${member.district ? `-${member.district}`: ''}`}
+                    </div>
+
+
             </div>
-            <div className='memberStateLabel'>
-                {`${member.state}`}
-            </div>
+            
             <div className="tileRow">
                 {positionTiles}
             </div>

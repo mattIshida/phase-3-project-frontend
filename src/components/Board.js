@@ -9,7 +9,7 @@ function Board({ members, votes, shades, setFilter, controlOptions }){
 
     return(
         <>
-            <Container className="Board col-8 my-3">
+            <Container className="Board sm-col-10 md-col-8 col-lg-5 xl-col-4 my-3">
                 {memberRows}
             </Container>
         </>
