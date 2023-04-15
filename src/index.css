@@ -79,6 +79,7 @@ code {
 }
 
 .memberNameLabel {
+  display: block;
 }
 
 .tileRow {
@@ -128,4 +129,11 @@ code {
 
 .blankTile {
   height: 0px;
+}
+
+.loaderContainer {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }

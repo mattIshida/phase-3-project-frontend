@@ -12,6 +12,8 @@ import IssuesPage from "./components/IssuesPage"
 import Board from './components/Board'
 import { Button } from 'react-bootstrap'
 import Controls from './components/Controls'
+import { BarLoader } from 'react-spinners'
+import Loading from './components/Loading'
 
 const URL = "http://localhost:9292"
 
@@ -56,8 +58,13 @@ function App() {
     }
   }
 
-  
-
+  // const standardPositions= ['Yes', 'No', 'Not Voting', 'Present', 'Total']
+  // const nonStandardPositions = votes.reduce((acc, elem) => {
+  //   for(let k in elem.summary){
+  //     if(!standardPositions.includes(k)){
+  //     }
+  //   }
+  // }, [])
 
   // useEffect(()=> {
   //   fetch(`${URL}/members`)
@@ -87,6 +94,8 @@ function App() {
   // return <>Hello</>
 
   return <>
+  {members.length==0 || votes.length==0 ? <Loading/> :
+  <>
     <Button onClick={()=>{
       setFilter({partyFilter: [], positionFilter: [], voteFilter: null})
     }}>Clear filters
@@ -102,6 +111,8 @@ function App() {
       setFilter={setFilter}
       controlOptions={controlOptions}
     />
+    </>
+    }
   </>
   // useEffect(()=> {
   //   fetch(`${URL}/bills`)
